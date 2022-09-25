@@ -1,3 +1,4 @@
+// const Product = require('../models/productModel')
 const Product = require('../models/productModel')
 const Review = require('../models/reviewModel')
 const CustomError = require('../errors')
@@ -85,10 +86,15 @@ const deleteProduct = async(req, res) => {
         .json({ msg: `Product with id: ${id} deleted succesfully!` })
 }
 
+const uploadImage = async(req, res) => {
+    res.send('upload image')
+}
+
 module.exports = {
     createProduct,
     getAllProducts,
     getSingleProduct,
     updateProduct,
     deleteProduct,
+    uploadImage,
 }

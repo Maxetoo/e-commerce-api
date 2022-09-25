@@ -10,8 +10,7 @@ const ProductSchema = new mongoose.Schema({
     },
     images: {
         type: Array,
-        required: [true, 'Please provide image'],
-        minLength: 5,
+        default: ['./images/image.jpg'],
     },
     price: {
         type: Number,
@@ -71,7 +70,6 @@ const ProductSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
-    reviews: [],
 }, {
     timestamps: true,
 })

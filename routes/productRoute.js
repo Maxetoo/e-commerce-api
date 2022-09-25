@@ -10,12 +10,17 @@ const {
     getSingleProduct,
     updateProduct,
     deleteProduct,
+    uploadImage,
 } = require('../controllers/productController')
 
 productRouter
     .route('/')
     .get(getAllProducts)
     .post(authentication, authorizeAccess('admin', 'merchant'), createProduct)
+
+productRouter
+    .route('/uploadImage')
+    .post(authentication, authorizeAccess('admin', 'merchant'), uploadImage)
 
 productRouter
     .route('/:id')

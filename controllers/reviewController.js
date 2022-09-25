@@ -1,3 +1,4 @@
+// const Product = require('../models/productModel')
 const Product = require('../models/productModel')
 const Review = require('../models/reviewModel')
 const CustomError = require('../errors')
