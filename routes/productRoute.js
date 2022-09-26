@@ -12,15 +12,22 @@ const {
     deleteProduct,
     uploadImage,
 } = require('../controllers/productController')
+const upload = require('../services/multerSetup')
 
 productRouter
     .route('/')
     .get(getAllProducts)
     .post(authentication, authorizeAccess('admin', 'merchant'), createProduct)
 
-productRouter
-    .route('/uploadImage')
-    .post(authentication, authorizeAccess('admin', 'merchant'), uploadImage)
+productRouter.route('/uploadImages').post(
+    authentication,
+    authorizeAccess('admin', 'merchant'),
+    upload.fields([
+        { name: 'avatar', maxCount: 1 },
+        { name: 'image', maxCount: 8 },
+    ]),
+    uploadImage
+)
 
 productRouter
     .route('/:id')

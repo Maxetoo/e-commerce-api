@@ -10,6 +10,8 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const helmet = require('helmet')
 const fileUpload = require('express-fileupload')
+const bodyParser = require('body-parser')
+const cloudinary = require('cloudinary').v2
 const authRouter = require('./routes/authRoute')
 const userRouter = require('./routes/userRoute')
 const productRouter = require('./routes/productRoute')
@@ -20,12 +22,19 @@ const ErrorMiddleware = require('./middlewares/errorMiddleware')
 
 // middlware tools
 app.use(express.json())
+app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 app.use(helmet())
 app.use(morgan('tiny'))
-app.use(fileUpload())
 app.use(cookieParser(process.env.COOKIE))
+app.use(fileUpload({ useTempFiles: true }))
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUD_API_KEY,
+    api_secret: process.env.CLOUD_API_SECRET,
+})
 
 app.get('/', (req, res) => {
     res.status(200).send('Foot city API')

@@ -87,6 +87,8 @@ const deleteProduct = async(req, res) => {
 }
 
 const uploadImage = async(req, res) => {
+    const imageFiles = req.files
+    console.log(imageFiles)
     res.send('upload image')
 }
 
