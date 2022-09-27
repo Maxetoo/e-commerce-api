@@ -43,12 +43,6 @@ const ProductSchema = new mongoose.Schema({
         type: Array,
         required: [true, 'Please provide product description'],
     },
-    rating: {
-        type: Number,
-        default: 0,
-        min: 0,
-        max: 5,
-    },
     freeShipping: {
         type: Boolean,
         default: false,
@@ -60,10 +54,6 @@ const ProductSchema = new mongoose.Schema({
     featured: {
         type: Boolean,
         default: false,
-    },
-    averageRating: {
-        type: Number,
-        default: 0,
     },
     user: {
         type: mongoose.Types.ObjectId,

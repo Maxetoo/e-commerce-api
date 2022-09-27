@@ -24,6 +24,12 @@ const ReviewSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please provide review comment'],
     },
+    rating: {
+        type: Number,
+        default: 0,
+        min: 0,
+        max: 5,
+    },
     replies: [ReplySchema],
     user: {
         type: mongoose.Types.ObjectId,
@@ -38,6 +44,6 @@ const ReviewSchema = new mongoose.Schema({
     timestamps: true,
 })
 
-// ReviewSchema.index({ user: 1, product: 1 }, { unique: true })
+ReviewSchema.index({ user: 1, product: 1 }, { unique: true })
 
 module.exports = mongoose.model('Review', ReviewSchema)

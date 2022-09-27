@@ -1,8 +1,9 @@
-// const Product = require('../models/productModel')
 const Product = require('../models/productModel')
-const Review = require('../models/reviewModel')
 const CustomError = require('../errors')
 const { StatusCodes } = require('http-status-codes')
+const cloudinary = require('cloudinary').v2
+const fs = require('fs')
+const path = require('path')
 
 const createProduct = async(req, res) => {
     const { name } = req.body
@@ -87,9 +88,21 @@ const deleteProduct = async(req, res) => {
 }
 
 const uploadImage = async(req, res) => {
+    let urls = []
     const imageFiles = req.files
-    console.log(imageFiles)
-    res.send('upload image')
+    for (const files of imageFiles) {
+        const filePath = path.join(__dirname, `../uploads/${files.filename}`)
+        const newPath = await cloudinary.uploader.upload(filePath, {
+            use_filename: true,
+            folder: 'e-commerce',
+        })
+        urls.push(newPath.secure_url)
+        fs.unlinkSync(filePath)
+    }
+
+    res.status(StatusCodes.OK).json({
+        data: urls,
+    })
 }
 
 module.exports = {

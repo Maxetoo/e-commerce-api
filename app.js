@@ -9,7 +9,8 @@ const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const helmet = require('helmet')
-const fileUpload = require('express-fileupload')
+const path = require('path')
+    // const fileUpload = require('express-fileupload')
 const bodyParser = require('body-parser')
 const cloudinary = require('cloudinary').v2
 const authRouter = require('./routes/authRoute')
@@ -28,7 +29,7 @@ app.use(cors())
 app.use(helmet())
 app.use(morgan('tiny'))
 app.use(cookieParser(process.env.COOKIE))
-app.use(fileUpload({ useTempFiles: true }))
+app.use(express.static(path.join(__dirname + './uploads')))
 
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
