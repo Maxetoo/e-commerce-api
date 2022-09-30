@@ -126,7 +126,7 @@ const getProductReviews = async(req, res) => {
 
 const updateReview = async(req, res) => {
     const { id } = req.params
-    const { title, comment } = req.body
+    const { title, comment, rating } = req.body
     const review = await Review.findOne({
         _id: id,
     })
@@ -134,6 +134,7 @@ const updateReview = async(req, res) => {
         throw new CustomError.NotFoundError(`Review with id: ${id} not found`)
     review.title = title
     review.comment = comment
+    review.rating = rating
     review.reply = []
     await review.save()
     res.status(StatusCodes.OK).json({

@@ -101,7 +101,7 @@ const uploadImage = async(req, res) => {
     }
 
     res.status(StatusCodes.OK).json({
-        data: urls,
+        src: urls,
     })
 }
 

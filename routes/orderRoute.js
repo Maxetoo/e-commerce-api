@@ -1,9 +1,6 @@
 const express = require('express')
 const orderRouter = express.Router()
-const {
-    authentication,
-    authorizeAccess,
-} = require('../middlewares/authentication')
+const { authentication } = require('../middlewares/authentication')
 const {
     getCartItems,
     updateCart,
@@ -13,6 +10,7 @@ const {
     deleteAddressDetails,
     addDeliveryMethod,
     confirmOrder,
+    deleteOrder,
 } = require('../controllers/orderController')
 
 // checkout is to add cartitems to db cart
@@ -21,8 +19,9 @@ orderRouter
     .get(authentication, getCartItems)
     .post(authentication, checkOut)
     .patch(authentication, updateCart)
+    .delete(authentication, deleteOrder)
 
-orderRouter.route('/placeOrder').post(authentication, confirmOrder)
+orderRouter.route('/placeOrder').get(authentication, confirmOrder)
 orderRouter
     .route('/addAddressDetails/:id')
     .patch(authentication, addAddressDetails)

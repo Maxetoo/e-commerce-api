@@ -3,14 +3,16 @@ const mongoose = require('mongoose')
 const ProductSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Please provide image'],
+        required: [true, 'Please provide name'],
         minLength: 3,
         trim: true,
         unique: true,
     },
     images: {
         type: Array,
-        default: ['./images/image.jpg'],
+        default: [
+            'https://res.cloudinary.com/dfamily/image/upload/v1664207221/e-commerce/BEGINNING_wzqtfz.jpg',
+        ],
     },
     price: {
         type: Number,
@@ -49,7 +51,7 @@ const ProductSchema = new mongoose.Schema({
     },
     inStock: {
         type: Number,
-        default: 0,
+        required: [true, 'Please provide how many products are in stock'],
     },
     featured: {
         type: Boolean,
@@ -62,6 +64,12 @@ const ProductSchema = new mongoose.Schema({
     },
 }, {
     timestamps: true,
+})
+
+ProductSchema.pre('remove', async function() {
+    await this.model('Review').deleteMany({
+        product: this._id,
+    })
 })
 
 module.exports = mongoose.model('Product', ProductSchema)

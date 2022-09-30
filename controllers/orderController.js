@@ -31,7 +31,21 @@ const checkOut = async(req, res) => {
 }
 
 const updateCart = async(req, res) => {
-    res.send('update cart')
+    const userID = req.user.userId
+
+    const findOrder = await Order.findOne({
+        user: userID,
+    })
+    if (!findOrder)
+        throw new CustomError.NotFoundError(`You don't have any order to modify`)
+    const order = await Order.findOneAndUpdate({
+        user: userID,
+    }, {
+        cart: req.body,
+    }, {
+        new: true,
+    })
+    res.status(StatusCodes.OK).json({ order })
 }
 
 const addAddressDetails = async(req, res) => {
@@ -152,7 +166,25 @@ const addDeliveryMethod = async(req, res) => {
 }
 
 const confirmOrder = async(req, res) => {
-    res.send('confirm order')
+    const userId = req.user.userId
+    const order = await Order.findOne({
+        user: userId,
+    })
+    const { addressDetails, cart, deliveryMethod, total } = order
+    if (addressDetails.length < 1 || !cart || !deliveryMethod || !total)
+        throw new CustomError.BadRequestError(`Please fill up credentials`)
+
+    res.status(StatusCodes.OK).json({ msg: `Proceed to payment` })
+}
+
+const deleteOrder = async(req, res) => {
+    const userId = req.user.userId
+    await Order.findOneAndDelete({
+        user: userId,
+    })
+    res.status(StatusCodes.OK).json({
+        msg: `Order deleted succesfully!`,
+    })
 }
 
 module.exports = {
@@ -164,4 +196,5 @@ module.exports = {
     deleteAddressDetails,
     addDeliveryMethod,
     confirmOrder,
+    deleteOrder,
 }

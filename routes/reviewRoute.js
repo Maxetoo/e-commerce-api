@@ -1,9 +1,6 @@
 const express = require('express')
 const reviewRouter = express.Router()
-const {
-    authentication,
-    authorizeAccess,
-} = require('../middlewares/authentication')
+const { authentication } = require('../middlewares/authentication')
 const {
     createReview,
     getAllReviews,

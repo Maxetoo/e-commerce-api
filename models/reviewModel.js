@@ -18,10 +18,12 @@ const ReviewSchema = new mongoose.Schema({
     title: {
         type: String,
         required: [true, 'Please provide review title'],
+        minLength: 3,
         trim: true,
     },
     comment: {
         type: String,
+        minLength: 3,
         required: [true, 'Please provide review comment'],
     },
     rating: {

@@ -1,0 +1,2021 @@
+openapi: 3.0.0
+info:
+  title: Foot City
+  contact: {}
+  version: '1.0'
+servers:
+- url: http://example.com
+  variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: Register User
+      description: This request is to log user in. Error is thrown if user does not provide firstName, lastName, a unique and valid email address and password which is at least 5 characters.
+      operationId: RegisterUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          text/plain:
+            schema:
+              type: object
+              example:
+                firstName: seyi
+                lastName: akere
+                email: seyiakere@gmail.com
+                password: secret123
+            example:
+              firstName: seyi
+              lastName: akere
+              email: seyiakere@gmail.com
+              password: secret123
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  user:
+                    firstName: seyi
+                    lastName: akere
+                    email: seyiakere@gmail.com
+                    password: $2b$10$qfcace3KYVMh5Y4Lurb/F.CeP/ByETTlpU66nvWzp45tnzZI11iQe
+                    role: user
+                    _id: 6335e2e070589fe6c326d301
+                    createdAt: 2022-09-29T18:24:32.791Z
+                    updatedAt: 2022-09-29T18:24:32.791Z
+                    __v: 0
+              example:
+                user:
+                  firstName: seyi
+                  lastName: akere
+                  email: seyiakere@gmail.com
+                  password: $2b$10$qfcace3KYVMh5Y4Lurb/F.CeP/ByETTlpU66nvWzp45tnzZI11iQe
+                  role: user
+                  _id: 6335e2e070589fe6c326d301
+                  createdAt: 2022-09-29T18:24:32.791Z
+                  updatedAt: 2022-09-29T18:24:32.791Z
+                  __v: 0
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: Login User
+      description: This request is to log user in. Error is thrown if user does not exist.
+      operationId: LoginUser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          text/plain:
+            schema:
+              type: object
+              example:
+                email: maxetoo@gmail.com
+                password: secret123
+            example:
+              email: maxetoo@gmail.com
+              password: secret123
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  user:
+                    _id: 6329108dddd6b7fc854ccd02
+                    firstName: maxwell
+                    lastName: etombi
+                    email: maxetoo@gmail.com
+                    password: $2b$10$eb0Cicligj.f7CQ9sG0nvOBs1C1EKy2i8/r5MP8n8iyU3WZcLbexa
+                    role: admin
+                    __v: 0
+              example:
+                user:
+                  _id: 6329108dddd6b7fc854ccd02
+                  firstName: maxwell
+                  lastName: etombi
+                  email: maxetoo@gmail.com
+                  password: $2b$10$eb0Cicligj.f7CQ9sG0nvOBs1C1EKy2i8/r5MP8n8iyU3WZcLbexa
+                  role: admin
+                  __v: 0
+      deprecated: false
+      security: []
+  /auth/logout:
+    post:
+      tags:
+      - Auth
+      summary: Logout User
+      description: This request logs out user by getting rid of existing cookies relating to the user being logged in.
+      operationId: LogoutUser
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  msg: User logged out successfully
+              example:
+                msg: User logged out successfully
+      deprecated: false
+  /:
+    get:
+      tags:
+      - User
+      summary: Get All Users
+      description: Gets all registered users in the database.
+      operationId: GetAllUsers
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  user:
+                  - _id: 6329108dddd6b7fc854ccd02
+                    firstName: maxwell
+                    lastName: etombi
+                    email: maxetoo@gmail.com
+                    role: admin
+                    __v: 0
+                  - _id: 63293058e61f2ff9c3d74210
+                    firstName: elkanah
+                    lastName: etombi
+                    email: elkanah@gmail.com
+                    role: admin
+                    __v: 0
+                  - _id: 632b46e02f1ad258c0b14812
+                    firstName: sewa
+                    lastName: etombi
+                    email: sewaetombi@gmail.com
+                    role: user
+                    __v: 0
+                  count: 3
+              example:
+                user:
+                - _id: 6329108dddd6b7fc854ccd02
+                  firstName: maxwell
+                  lastName: etombi
+                  email: maxetoo@gmail.com
+                  role: admin
+                  __v: 0
+                - _id: 63293058e61f2ff9c3d74210
+                  firstName: elkanah
+                  lastName: etombi
+                  email: elkanah@gmail.com
+                  role: admin
+                  __v: 0
+                - _id: 632b46e02f1ad258c0b14812
+                  firstName: sewa
+                  lastName: etombi
+                  email: sewaetombi@gmail.com
+                  role: user
+                  __v: 0
+                count: 3
+      deprecated: false
+    delete:
+      tags:
+      - Order
+      summary: Delete Order
+      description: This request deletes an existing user order
+      operationId: DeleteOrder
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  msg: Order deleted succesfully!
+              example:
+                msg: Order deleted succesfully!
+      deprecated: false
+  /user/make-admin/{user_id}:
+    patch:
+      tags:
+      - User
+      summary: Make Admin
+      description: This request is to update user role to admin. With the admin role, user has unrestricted access to all features.
+      operationId: MakeAdmin
+      parameters:
+      - name: user_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          text/plain:
+            schema:
+              type: object
+              example:
+                _id: 6329108dddd6b7fc854ccd02
+                firstName: elkanah
+                lastName: etombi
+                email: maxetoo@gmail.com
+                role: admin
+                __v: 0
+                updatedAt: 2022-09-29T18:46:03.239Z
+            example:
+              _id: 6329108dddd6b7fc854ccd02
+              firstName: elkanah
+              lastName: etombi
+              email: maxetoo@gmail.com
+              role: admin
+              __v: 0
+              updatedAt: 2022-09-29T18:46:03.239Z
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  user:
+                    _id: 6329108dddd6b7fc854ccd02
+                    firstName: maxwell
+                    lastName: etombi
+                    email: maxetoo@gmail.com
+                    password: $2b$10$eb0Cicligj.f7CQ9sG0nvOBs1C1EKy2i8/r5MP8n8iyU3WZcLbexa
+                    role: admin
+                    __v: 0
+              example:
+                user:
+                  _id: 6329108dddd6b7fc854ccd02
+                  firstName: maxwell
+                  lastName: etombi
+                  email: maxetoo@gmail.com
+                  password: $2b$10$eb0Cicligj.f7CQ9sG0nvOBs1C1EKy2i8/r5MP8n8iyU3WZcLbexa
+                  role: admin
+                  __v: 0
+      deprecated: false
+  /user/make-merchant/{user_id}:
+    patch:
+      tags:
+      - User
+      summary: Make Merchant
+      description: This request is to update a user role into merchant, based on the user id. With the merchant role, merchants can create, update and delete products associated to profile.
+      operationId: MakeMerchant
+      parameters:
+      - name: user_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          text/plain:
+            schema:
+              type: object
+              example:
+                _id: 632b46e02f1ad258c0b14812
+                firstName: sewa
+                lastName: etombi
+                email: sewaetombi@gmail.com
+                role: merchant
+                __v: 0
+                updatedAt: 2022-09-29T18:39:59.542Z
+            example:
+              _id: 632b46e02f1ad258c0b14812
+              firstName: sewa
+              lastName: etombi
+              email: sewaetombi@gmail.com
+              role: merchant
+              __v: 0
+              updatedAt: 2022-09-29T18:39:59.542Z
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  user:
+                    _id: 632b46e02f1ad258c0b14812
+                    firstName: sewa
+                    lastName: etombi
+                    email: sewaetombi@gmail.com
+                    password: $2b$10$aYkxLlSoD1lDqwlVfPsGEuM/HlJdIP8QaRP7ULmFEOBDfLJgY5GE2
+                    role: merchant
+                    __v: 0
+                    updatedAt: 2022-09-29T18:39:59.542Z
+              example:
+                user:
+                  _id: 632b46e02f1ad258c0b14812
+                  firstName: sewa
+                  lastName: etombi
+                  email: sewaetombi@gmail.com
+                  password: $2b$10$aYkxLlSoD1lDqwlVfPsGEuM/HlJdIP8QaRP7ULmFEOBDfLJgY5GE2
+                  role: merchant
+                  __v: 0
+                  updatedAt: 2022-09-29T18:39:59.542Z
+      deprecated: false
+  /user/profile:
+    get:
+      tags:
+      - User
+      summary: Show My Profile
+      description: Show full details of user profile.
+      operationId: ShowMyProfile
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  user:
+                    _id: 6329108dddd6b7fc854ccd02
+                    firstName: maxwell
+                    lastName: etombi
+                    email: maxetoo@gmail.com
+                    role: admin
+                    __v: 0
+              example:
+                user:
+                  _id: 6329108dddd6b7fc854ccd02
+                  firstName: maxwell
+                  lastName: etombi
+                  email: maxetoo@gmail.com
+                  role: admin
+                  __v: 0
+      deprecated: false
+  /user/update-profile:
+    patch:
+      tags:
+      - User
+      summary: Update Profile
+      description: This request updates fields in user profile. From the response, user firstName value has been updated from maxwell to elkanah.
+      operationId: UpdateProfile
+      parameters: []
+      requestBody:
+        description: firstName value which is elkanah is updated to maxwell
+        content:
+          text/plain:
+            schema:
+              type: object
+              description: firstName value which is elkanah is updated to maxwell
+              example:
+                firstName: elkanah
+            example:
+              firstName: elkanah
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  user:
+                    _id: 6329108dddd6b7fc854ccd02
+                    firstName: elkanah
+                    lastName: etombi
+                    email: maxetoo@gmail.com
+                    password: $2b$10$eb0Cicligj.f7CQ9sG0nvOBs1C1EKy2i8/r5MP8n8iyU3WZcLbexa
+                    role: admin
+                    __v: 0
+                    updatedAt: 2022-09-29T18:41:56.690Z
+              example:
+                user:
+                  _id: 6329108dddd6b7fc854ccd02
+                  firstName: elkanah
+                  lastName: etombi
+                  email: maxetoo@gmail.com
+                  password: $2b$10$eb0Cicligj.f7CQ9sG0nvOBs1C1EKy2i8/r5MP8n8iyU3WZcLbexa
+                  role: admin
+                  __v: 0
+                  updatedAt: 2022-09-29T18:41:56.690Z
+      deprecated: false
+  /user/update-password:
+    patch:
+      tags:
+      - User
+      summary: Change Password
+      description: Change user password.
+      operationId: ChangePassword
+      parameters: []
+      requestBody:
+        description: oldPassword value must be provided and accurate to update newPassword field value
+        content:
+          text/plain:
+            schema:
+              type: object
+              description: oldPassword value must be provided and accurate to update newPassword field value
+              example:
+                oldPassword: secret123
+                newPassword: secret123
+            example:
+              oldPassword: secret123
+              newPassword: secret123
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  msg: Password updated successfully!
+              example:
+                msg: Password updated successfully!
+      deprecated: false
+  /user/{user_id}:
+    get:
+      tags:
+      - User
+      summary: Get Single User
+      description: Get single user. This is only applicable to admins
+      operationId: GetSingleUser
+      parameters:
+      - name: user_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  user:
+                    _id: 6329108dddd6b7fc854ccd02
+                    firstName: elkanah
+                    lastName: etombi
+                    email: maxetoo@gmail.com
+                    role: admin
+                    __v: 0
+                    updatedAt: 2022-09-29T18:46:03.239Z
+              example:
+                user:
+                  _id: 6329108dddd6b7fc854ccd02
+                  firstName: elkanah
+                  lastName: etombi
+                  email: maxetoo@gmail.com
+                  role: admin
+                  __v: 0
+                  updatedAt: 2022-09-29T18:46:03.239Z
+      deprecated: false
+    delete:
+      tags:
+      - User
+      summary: Remove Single User
+      description: Delete user. This is only applicable to admins. Users cannot delete other users except there are admins.
+      operationId: RemoveSingleUser
+      parameters:
+      - name: user_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  msg: 'user with id: 6335e2e070589fe6c326d301 removed successfully'
+              example:
+                msg: 'user with id: 6335e2e070589fe6c326d301 removed successfully'
+      deprecated: false
+  /product:
+    get:
+      tags:
+      - Product
+      summary: Get All Products
+      description: This request get all products available in the database.
+      operationId: GetAllProducts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  products:
+                  - _id: 6335fbfea4564824000feb46
+                    name: Python
+                    images:
+                    - https://res.cloudinary.com/dfamily/image/upload/v1664207221/e-commerce/BEGINNING_wzqtfz.jpg
+                    - https://res.cloudinary.com/dfamily/image/upload/v1664207222/e-commerce/box_jly9b8.jpg
+                    price: 50000
+                    currency: USD
+                    colors:
+                    - '#0000'
+                    size:
+                    - 20
+                    - 21
+                    company: adiddas
+                    categories:
+                    - men
+                    - shoes
+                    description:
+                    - good to wear
+                    freeShipping: false
+                    inStock: 0
+                    featured: false
+                    user: 6329108dddd6b7fc854ccd02
+                    createdAt: 2022-09-29T20:11:42.442Z
+                    updatedAt: 2022-09-29T20:11:42.442Z
+                    __v: 0
+                  count: 1
+              example:
+                products:
+                - _id: 6335fbfea4564824000feb46
+                  name: Python
+                  images:
+                  - https://res.cloudinary.com/dfamily/image/upload/v1664207221/e-commerce/BEGINNING_wzqtfz.jpg
+                  - https://res.cloudinary.com/dfamily/image/upload/v1664207222/e-commerce/box_jly9b8.jpg
+                  price: 50000
+                  currency: USD
+                  colors:
+                  - '#0000'
+                  size:
+                  - 20
+                  - 21
+                  company: adiddas
+                  categories:
+                  - men
+                  - shoes
+                  description:
+                  - good to wear
+                  freeShipping: false
+                  inStock: 0
+                  featured: false
+                  user: 6329108dddd6b7fc854ccd02
+                  createdAt: 2022-09-29T20:11:42.442Z
+                  updatedAt: 2022-09-29T20:11:42.442Z
+                  __v: 0
+                count: 1
+      deprecated: false
+      security: []
+    post:
+      tags:
+      - Product
+      summary: Create Product
+      description: This request creates a product with a unique name. Only admins and merchants can create products
+      operationId: CreateProduct
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          text/plain:
+            schema:
+              type: object
+              example:
+                product:
+                  name: Python
+                  images:
+                  - https://res.cloudinary.com/dfamily/image/upload/v1664207221/e-commerce/BEGINNING_wzqtfz.jpg
+                  - https://res.cloudinary.com/dfamily/image/upload/v1664207222/e-commerce/box_jly9b8.jpg
+                  price: 50000
+                  currency: USD
+                  colors:
+                  - '#0000'
+                  size:
+                  - 20
+                  - 21
+                  company: adiddas
+                  categories:
+                  - men
+                  - shoes
+                  description:
+                  - good to wear
+                  freeShipping: false
+                  inStock: 0
+                  featured: false
+                  user: 6329108dddd6b7fc854ccd02
+                  _id: 6335fbfea4564824000feb46
+                  createdAt: 2022-09-29T20:11:42.442Z
+                  updatedAt: 2022-09-29T20:11:42.442Z
+                  __v: 0
+            example:
+              product:
+                name: Python
+                images:
+                - https://res.cloudinary.com/dfamily/image/upload/v1664207221/e-commerce/BEGINNING_wzqtfz.jpg
+                - https://res.cloudinary.com/dfamily/image/upload/v1664207222/e-commerce/box_jly9b8.jpg
+                price: 50000
+                currency: USD
+                colors:
+                - '#0000'
+                size:
+                - 20
+                - 21
+                company: adiddas
+                categories:
+                - men
+                - shoes
+                description:
+                - good to wear
+                freeShipping: false
+                inStock: 0
+                featured: false
+                user: 6329108dddd6b7fc854ccd02
+                _id: 6335fbfea4564824000feb46
+                createdAt: 2022-09-29T20:11:42.442Z
+                updatedAt: 2022-09-29T20:11:42.442Z
+                __v: 0
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  name: Python
+                  images:
+                  - https://res.cloudinary.com/dfamily/image/upload/v1664207221/e-commerce/BEGINNING_wzqtfz.jpg
+                  - https://res.cloudinary.com/dfamily/image/upload/v1664207222/e-commerce/box_jly9b8.jpg
+                  price: 50000
+                  currency: USD
+                  colors:
+                  - '#0000'
+                  size:
+                  - 20
+                  - 21
+                  company: adiddas
+                  categories:
+                  - men
+                  - shoes
+                  description:
+                  - good to wear
+              example:
+                name: Python
+                images:
+                - https://res.cloudinary.com/dfamily/image/upload/v1664207221/e-commerce/BEGINNING_wzqtfz.jpg
+                - https://res.cloudinary.com/dfamily/image/upload/v1664207222/e-commerce/box_jly9b8.jpg
+                price: 50000
+                currency: USD
+                colors:
+                - '#0000'
+                size:
+                - 20
+                - 21
+                company: adiddas
+                categories:
+                - men
+                - shoes
+                description:
+                - good to wear
+      deprecated: false
+  /product/uploadImage:
+    post:
+      tags:
+      - Product
+      summary: Upload Image
+      description: Upload single or multiple image file. Maximum amount of images that can be uploaded at once is 4.
+      operationId: UploadImage
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding: {}
+            schema:
+              required:
+              - Body
+              type: object
+              properties:
+                Body:
+                  type: string
+                  format: binary
+        required: false
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  src:
+                  - https://res.cloudinary.com/dfamily/image/upload/v1664463934/e-commerce/BEGINNING_ksc415.jpg
+                  - https://res.cloudinary.com/dfamily/image/upload/v1664463936/e-commerce/box_dhvygs.jpg
+              example:
+                src:
+                - https://res.cloudinary.com/dfamily/image/upload/v1664463934/e-commerce/BEGINNING_ksc415.jpg
+                - https://res.cloudinary.com/dfamily/image/upload/v1664463936/e-commerce/box_dhvygs.jpg
+      deprecated: false
+  /product/{product_id}:
+    get:
+      tags:
+      - Product
+      summary: Get Single Product
+      description: Get a particular product with a specific id
+      operationId: GetSingleProduct
+      parameters:
+      - name: product_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  product:
+                    _id: 632cdb401754c87fa6ee6008
+                    name: nike canvas
+                    images:
+                    - ./uploads/image.jpg
+                    price: 50000
+                    currency: USD
+                    colors:
+                    - '#0000'
+                    size:
+                    - 20
+                    - 21
+                    company: adiddas
+                    categories:
+                    - men
+                    - shoes
+                    description:
+                    - good to wear
+                    rating: 0
+                    freeShipping: false
+                    inStock: 0
+                    featured: false
+                    averageRating: 0
+                    user:
+                      _id: 6329108dddd6b7fc854ccd02
+                      firstName: elkanah
+                      role: admin
+                    createdAt: 2022-09-22T22:01:36.642Z
+                    updatedAt: 2022-09-22T22:01:36.642Z
+                    __v: 0
+              example:
+                product:
+                  _id: 632cdb401754c87fa6ee6008
+                  name: nike canvas
+                  images:
+                  - ./uploads/image.jpg
+                  price: 50000
+                  currency: USD
+                  colors:
+                  - '#0000'
+                  size:
+                  - 20
+                  - 21
+                  company: adiddas
+                  categories:
+                  - men
+                  - shoes
+                  description:
+                  - good to wear
+                  rating: 0
+                  freeShipping: false
+                  inStock: 0
+                  featured: false
+                  averageRating: 0
+                  user:
+                    _id: 6329108dddd6b7fc854ccd02
+                    firstName: elkanah
+                    role: admin
+                  createdAt: 2022-09-22T22:01:36.642Z
+                  updatedAt: 2022-09-22T22:01:36.642Z
+                  __v: 0
+      deprecated: false
+      security: []
+    patch:
+      tags:
+      - Product
+      summary: Update Product
+      description: Update specific product fields based on product id. Only admins and merchants that created such product can update details concerning the product. Else, error will be thrown.
+      operationId: UpdateProduct
+      parameters:
+      - name: product_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: This is how to change the name of a particular product to another.
+        content:
+          text/plain:
+            schema:
+              type: object
+              description: This is how to change the name of a particular product to another.
+              example:
+                name: canvas nikes
+            example:
+              name: canvas nikes
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  product:
+                    _id: 632cdb401754c87fa6ee6008
+                    name: canvas nikes
+                    images:
+                    - ./uploads/image.jpg
+                    price: 50000
+                    currency: USD
+                    colors:
+                    - '#0000'
+                    size:
+                    - 20
+                    - 21
+                    company: adiddas
+                    categories:
+                    - men
+                    - shoes
+                    description:
+                    - good to wear
+                    rating: 0
+                    freeShipping: false
+                    inStock: 0
+                    featured: false
+                    averageRating: 0
+                    user: 6329108dddd6b7fc854ccd02
+                    createdAt: 2022-09-22T22:01:36.642Z
+                    updatedAt: 2022-09-29T20:06:00.359Z
+                    __v: 0
+              example:
+                product:
+                  _id: 632cdb401754c87fa6ee6008
+                  name: canvas nikes
+                  images:
+                  - ./uploads/image.jpg
+                  price: 50000
+                  currency: USD
+                  colors:
+                  - '#0000'
+                  size:
+                  - 20
+                  - 21
+                  company: adiddas
+                  categories:
+                  - men
+                  - shoes
+                  description:
+                  - good to wear
+                  rating: 0
+                  freeShipping: false
+                  inStock: 0
+                  featured: false
+                  averageRating: 0
+                  user: 6329108dddd6b7fc854ccd02
+                  createdAt: 2022-09-22T22:01:36.642Z
+                  updatedAt: 2022-09-29T20:06:00.359Z
+                  __v: 0
+      deprecated: false
+    delete:
+      tags:
+      - Product
+      summary: Delete Product
+      description: Delete product with specific id
+      operationId: DeleteProduct
+      parameters:
+      - name: product_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  msg: 'Product with id: 632bd5639c7bb4d65511b323 deleted succesfully!'
+              example:
+                msg: 'Product with id: 632bd5639c7bb4d65511b323 deleted succesfully!'
+      deprecated: false
+  /review:
+    get:
+      tags:
+      - Review
+      summary: Get All Reviews
+      description: This request gets all reviews available in database
+      operationId: GetAllReviews
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  reviews:
+                  - _id: 63362f5be704ab2653e5eda2
+                    title: Good Rating
+                    comment: This is a really good product
+                    rating: 0
+                    user:
+                      _id: 6329108dddd6b7fc854ccd02
+                      firstName: elkanah
+                    product: 63362bc9e704ab2653e5ed9c
+                    replies: []
+                    createdAt: 2022-09-29T23:50:51.425Z
+                    updatedAt: 2022-09-29T23:50:51.425Z
+                    __v: 0
+                  count: 1
+              example:
+                reviews:
+                - _id: 63362f5be704ab2653e5eda2
+                  title: Good Rating
+                  comment: This is a really good product
+                  rating: 0
+                  user:
+                    _id: 6329108dddd6b7fc854ccd02
+                    firstName: elkanah
+                  product: 63362bc9e704ab2653e5ed9c
+                  replies: []
+                  createdAt: 2022-09-29T23:50:51.425Z
+                  updatedAt: 2022-09-29T23:50:51.425Z
+                  __v: 0
+                count: 1
+      deprecated: false
+      security: []
+    post:
+      tags:
+      - Review
+      summary: Create Review
+      description: This request creates a review and associates it to a particular product that exists. A user cannot have more than one review for a particular product.
+      operationId: CreateReview
+      parameters: []
+      requestBody:
+        description: The product field value must be the id of a product that exist
+        content:
+          text/plain:
+            schema:
+              type: object
+              description: The product field value must be the id of a product that exist
+              example:
+                title: Good Rating
+                comment: This is a really good product
+                product: 63362bc9e704ab2653e5ed9c
+                rating: 4
+            example:
+              title: Good Rating
+              comment: This is a really good product
+              product: 63362bc9e704ab2653e5ed9c
+              rating: 4
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  review:
+                    title: Good Rating
+                    comment: This is a really good product
+                    rating: 4
+                    user: 6329108dddd6b7fc854ccd02
+                    product: 63362bc9e704ab2653e5ed9c
+                    _id: 633632b0e704ab2653e5edb2
+                    replies: []
+                    createdAt: 2022-09-30T00:05:04.517Z
+                    updatedAt: 2022-09-30T00:05:04.517Z
+                    __v: 0
+              example:
+                review:
+                  title: Good Rating
+                  comment: This is a really good product
+                  rating: 4
+                  user: 6329108dddd6b7fc854ccd02
+                  product: 63362bc9e704ab2653e5ed9c
+                  _id: 633632b0e704ab2653e5edb2
+                  replies: []
+                  createdAt: 2022-09-30T00:05:04.517Z
+                  updatedAt: 2022-09-30T00:05:04.517Z
+                  __v: 0
+      deprecated: false
+  /review/{review_id}:
+    get:
+      tags:
+      - Review
+      summary: Get Single Review
+      description: This request gets a single review that matches the id of an existing review
+      operationId: GetSingleReview
+      parameters:
+      - name: review_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  review:
+                    _id: 633632b0e704ab2653e5edb2
+                    title: Good Rating
+                    comment: This is a really good product
+                    rating: 4
+                    user:
+                      _id: 6329108dddd6b7fc854ccd02
+                      firstName: elkanah
+                      email: maxetoo@gmail.com
+                    product: 63362bc9e704ab2653e5ed9c
+                    replies: []
+                    createdAt: 2022-09-30T00:05:04.517Z
+                    updatedAt: 2022-09-30T00:05:04.517Z
+                    __v: 0
+              example:
+                review:
+                  _id: 633632b0e704ab2653e5edb2
+                  title: Good Rating
+                  comment: This is a really good product
+                  rating: 4
+                  user:
+                    _id: 6329108dddd6b7fc854ccd02
+                    firstName: elkanah
+                    email: maxetoo@gmail.com
+                  product: 63362bc9e704ab2653e5ed9c
+                  replies: []
+                  createdAt: 2022-09-30T00:05:04.517Z
+                  updatedAt: 2022-09-30T00:05:04.517Z
+                  __v: 0
+      deprecated: false
+    patch:
+      tags:
+      - Review
+      summary: Update Review
+      description: This request updates a particular existing review based on it's id
+      operationId: UpdateReview
+      parameters:
+      - name: review_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          text/plain:
+            schema:
+              type: object
+              example:
+                title: Great product
+                comment: Just really top notch
+                rating: 5
+            example:
+              title: Great product
+              comment: Just really top notch
+              rating: 5
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  review:
+                    _id: 633632b0e704ab2653e5edb2
+                    title: Great product
+                    comment: Just really top notch
+                    rating: 5
+                    user: 6329108dddd6b7fc854ccd02
+                    product: 63362bc9e704ab2653e5ed9c
+                    replies: []
+                    createdAt: 2022-09-30T00:05:04.517Z
+                    updatedAt: 2022-09-30T00:09:42.394Z
+                    __v: 0
+              example:
+                review:
+                  _id: 633632b0e704ab2653e5edb2
+                  title: Great product
+                  comment: Just really top notch
+                  rating: 5
+                  user: 6329108dddd6b7fc854ccd02
+                  product: 63362bc9e704ab2653e5ed9c
+                  replies: []
+                  createdAt: 2022-09-30T00:05:04.517Z
+                  updatedAt: 2022-09-30T00:09:42.394Z
+                  __v: 0
+      deprecated: false
+    delete:
+      tags:
+      - Review
+      summary: Delete Review
+      description: This request deletes a particular review for a specific product
+      operationId: DeleteReview
+      parameters:
+      - name: review_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  msg: Review deleted successfully!
+              example:
+                msg: Review deleted successfully!
+      deprecated: false
+  /review/userReply/{review_id}:
+    patch:
+      tags:
+      - Review
+      summary: Add User Reply
+      description: This request adds reply to a specific product review
+      operationId: AddUserReply
+      parameters:
+      - name: review_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          text/plain:
+            schema:
+              type: object
+              example:
+                comment: You are very correct
+            example:
+              comment: You are very correct
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  reviews:
+                  - _id: 633632b0e704ab2653e5edb2
+                    title: Great product
+                    comment: Just really top notch
+                    rating: 5
+                    user:
+                      _id: 6329108dddd6b7fc854ccd02
+                      firstName: elkanah
+                    product: 63362bc9e704ab2653e5ed9c
+                    replies:
+                    - comment: You are very correct
+                      user:
+                        _id: 6329108dddd6b7fc854ccd02
+                        firstName: elkanah
+                      _id: 633634e3617e01b0ac6f476d
+                      updatedAt: 2022-09-30T00:14:27.260Z
+                      createdAt: 2022-09-30T00:14:27.260Z
+                    createdAt: 2022-09-30T00:05:04.517Z
+                    updatedAt: 2022-09-30T00:14:27.260Z
+                    __v: 0
+                  count: 1
+              example:
+                reviews:
+                - _id: 633632b0e704ab2653e5edb2
+                  title: Great product
+                  comment: Just really top notch
+                  rating: 5
+                  user:
+                    _id: 6329108dddd6b7fc854ccd02
+                    firstName: elkanah
+                  product: 63362bc9e704ab2653e5ed9c
+                  replies:
+                  - comment: You are very correct
+                    user:
+                      _id: 6329108dddd6b7fc854ccd02
+                      firstName: elkanah
+                    _id: 633634e3617e01b0ac6f476d
+                    updatedAt: 2022-09-30T00:14:27.260Z
+                    createdAt: 2022-09-30T00:14:27.260Z
+                  createdAt: 2022-09-30T00:05:04.517Z
+                  updatedAt: 2022-09-30T00:14:27.260Z
+                  __v: 0
+                count: 1
+      deprecated: false
+  /review/deleteUserReply/{review_id}:
+    patch:
+      tags:
+      - Review
+      summary: Delete User Reply
+      description: This request deletes the reply of a product review
+      operationId: DeleteUserReply
+      parameters:
+      - name: review_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: The value of the deleteId field must be that of the reply created from the product review
+        content:
+          text/plain:
+            schema:
+              type: object
+              description: The value of the deleteId field must be that of the reply created from the product review
+              example:
+                deleteId: 633634e3617e01b0ac6f476d
+            example:
+              deleteId: 633634e3617e01b0ac6f476d
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  msg: Reply deleted succesfully
+              example:
+                msg: Reply deleted succesfully
+      deprecated: false
+  /review/productReviews/{product_id}:
+    get:
+      tags:
+      - Review
+      summary: Get Product Reviews
+      description: This request gets all the reviews associated to a particular product
+      operationId: GetProductReviews
+      parameters:
+      - name: product_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  reviews:
+                  - _id: 633632b0e704ab2653e5edb2
+                    title: Great product
+                    comment: Just really top notch
+                    rating: 5
+                    user: 6329108dddd6b7fc854ccd02
+                    product: 63362bc9e704ab2653e5ed9c
+                    replies: []
+                    createdAt: 2022-09-30T00:05:04.517Z
+                    updatedAt: 2022-09-30T00:18:25.376Z
+                    __v: 0
+                  count: 1
+              example:
+                reviews:
+                - _id: 633632b0e704ab2653e5edb2
+                  title: Great product
+                  comment: Just really top notch
+                  rating: 5
+                  user: 6329108dddd6b7fc854ccd02
+                  product: 63362bc9e704ab2653e5ed9c
+                  replies: []
+                  createdAt: 2022-09-30T00:05:04.517Z
+                  updatedAt: 2022-09-30T00:18:25.376Z
+                  __v: 0
+                count: 1
+      deprecated: false
+  /order:
+    post:
+      tags:
+      - Order
+      summary: Check Out
+      description: This request checks out user cart list and adds them to order.
+      operationId: CheckOut
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          text/plain:
+            schema:
+              type: object
+              example:
+                total: 5000
+                subtotal: 6000
+                shipping: 1000
+                orderStatus: pending
+                addressDetails: []
+                cart:
+                - name: Nike
+                  image: ./images/image.jpg
+                  quantity: 3
+                  size: xl
+                  color: red
+            example:
+              total: 5000
+              subtotal: 6000
+              shipping: 1000
+              orderStatus: pending
+              addressDetails: []
+              cart:
+              - name: Nike
+                image: ./images/image.jpg
+                quantity: 3
+                size: xl
+                color: red
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  order:
+                    subtotal: 6000
+                    shipping: 1000
+                    total: 5000
+                    addressDetails: []
+                    cart:
+                    - name: Nike
+                      image: ./images/image.jpg
+                      quantity: 3
+                      size: xl
+                      color: red
+                      _id: 63363b318cb7a4d511d7f66d
+                    orderStatus: pending
+                    user: 6329108dddd6b7fc854ccd02
+                    _id: 63363b318cb7a4d511d7f66c
+                    __v: 0
+              example:
+                order:
+                  subtotal: 6000
+                  shipping: 1000
+                  total: 5000
+                  addressDetails: []
+                  cart:
+                  - name: Nike
+                    image: ./images/image.jpg
+                    quantity: 3
+                    size: xl
+                    color: red
+                    _id: 63363b318cb7a4d511d7f66d
+                  orderStatus: pending
+                  user: 6329108dddd6b7fc854ccd02
+                  _id: 63363b318cb7a4d511d7f66c
+                  __v: 0
+      deprecated: false
+    patch:
+      tags:
+      - Order
+      summary: Update Cart
+      description: This request updates the cart of an existing order
+      operationId: UpdateCart
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          text/plain:
+            schema:
+              type: object
+              example:
+                name: Nike
+                image: ./images/image.jpg
+                quantity: 3
+                size: xl
+                color: white
+            example:
+              name: Nike
+              image: ./images/image.jpg
+              quantity: 3
+              size: xl
+              color: white
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  order:
+                    _id: 63363b318cb7a4d511d7f66c
+                    subtotal: 6000
+                    shipping: 1000
+                    total: 5000
+                    addressDetails: []
+                    cart:
+                    - name: Nike
+                      image: ./images/image.jpg
+                      quantity: 3
+                      size: xl
+                      color: white
+                      _id: 63363bd48cb7a4d511d7f671
+                    orderStatus: pending
+                    user: 6329108dddd6b7fc854ccd02
+                    __v: 0
+              example:
+                order:
+                  _id: 63363b318cb7a4d511d7f66c
+                  subtotal: 6000
+                  shipping: 1000
+                  total: 5000
+                  addressDetails: []
+                  cart:
+                  - name: Nike
+                    image: ./images/image.jpg
+                    quantity: 3
+                    size: xl
+                    color: white
+                    _id: 63363bd48cb7a4d511d7f671
+                  orderStatus: pending
+                  user: 6329108dddd6b7fc854ccd02
+                  __v: 0
+      deprecated: false
+  /order/addAddressDetails/{order_id}:
+    patch:
+      tags:
+      - Order
+      summary: Add Address Details
+      description: This request adds address details to the addressDetails field array in the order object
+      operationId: AddAddressDetails
+      parameters:
+      - name: order_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          text/plain:
+            schema:
+              type: object
+              example:
+                firstName: Maxwell
+                lastName: Etombi
+                email: etombimaxwell@gmail.com
+                deliveryAddress: Plot 190, Extension 2
+                city: Abuja
+                region: Kubwa
+            example:
+              firstName: Maxwell
+              lastName: Etombi
+              email: etombimaxwell@gmail.com
+              deliveryAddress: Plot 190, Extension 2
+              city: Abuja
+              region: Kubwa
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  order:
+                    acknowledged: true
+                    modifiedCount: 1
+                    upsertedId: null
+                    upsertedCount: 0
+                    matchedCount: 1
+              example:
+                order:
+                  acknowledged: true
+                  modifiedCount: 1
+                  upsertedId: null
+                  upsertedCount: 0
+                  matchedCount: 1
+      deprecated: false
+  /order/updateAddressDetails/{order_id}:
+    patch:
+      tags:
+      - Order
+      summary: Update Address Details
+      description: This request updates a specific address info based on the addressDetails id
+      operationId: UpdateAddressDetails
+      parameters:
+      - name: order_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: The updateId is the id of the addressDetails that wants to be updated. Hence, must be provided
+        content:
+          text/plain:
+            schema:
+              type: object
+              description: The updateId is the id of the addressDetails that wants to be updated. Hence, must be provided
+              example:
+                updateId: 63363c8f8cb7a4d511d7f679
+                firstName: MiriamElkanah
+                lastName: Etombi
+                email: etombimaxwell@gmail.com
+                deliveryAddress: Plot 190, Extension 2
+                city: Abuja
+                region: Kubwa
+            example:
+              updateId: 63363c8f8cb7a4d511d7f679
+              firstName: MiriamElkanah
+              lastName: Etombi
+              email: etombimaxwell@gmail.com
+              deliveryAddress: Plot 190, Extension 2
+              city: Abuja
+              region: Kubwa
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  msg: Address details updated successfully!
+              example:
+                msg: Address details updated successfully!
+      deprecated: false
+  /order/deleteAddressDetails/{order_id}:
+    patch:
+      tags:
+      - Order
+      summary: Delete Address Details
+      description: This request deletes addressDetails based on the order id
+      operationId: DeleteAddressDetails
+      parameters:
+      - name: order_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: The deleteId is the id of the specific address detail that wants to be removed from the list.
+        content:
+          text/plain:
+            schema:
+              type: object
+              description: The deleteId is the id of the specific address detail that wants to be removed from the list.
+              example:
+                deleteId: 63363c8f8cb7a4d511d7f679
+            example:
+              deleteId: 63363c8f8cb7a4d511d7f679
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  msg: Address details deleted successfully!
+              example:
+                msg: Address details deleted successfully!
+      deprecated: false
+  /order/addDeliveryMethod/{order_id}:
+    patch:
+      tags:
+      - Order
+      summary: Add Delivery Method
+      description: This request adds delivery method to the existing user order. Delivery method can only be of value "Door Delivery" or "Pickup Station".
+      operationId: AddDeliveryMethod
+      parameters:
+      - name: order_id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          text/plain:
+            schema:
+              type: object
+              example:
+                deliveryMethod: Door Delivery
+            example:
+              deliveryMethod: Door Delivery
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+          content:
+            text/plain:
+              schema:
+                type: object
+                example:
+                  order:
+                    _id: 63363b318cb7a4d511d7f66c
+                    subtotal: 6000
+                    shipping: 1000
+                    total: 5000
+                    addressDetails:
+                    - firstName: MiriamElkanah
+                      lastName: Etombi
+                      email: etombimaxwell@gmail.com
+                      deliveryAddress: Plot 190, Extension 2
+                      region: Kubwa
+                      city: Abuja
+                      _id: 63364d7f8cb7a4d511d7f684
+                    cart:
+                    - name: Nike
+                      image: ./images/image.jpg
+                      quantity: 3
+                      size: xl
+                      color: white
+                      _id: 63363bd48cb7a4d511d7f671
+                    orderStatus: pending
+                    user: 6329108dddd6b7fc854ccd02
+                    __v: 0
+                    deliveryMethod: Door Delivery
+              example:
+                order:
+                  _id: 63363b318cb7a4d511d7f66c
+                  subtotal: 6000
+                  shipping: 1000
+                  total: 5000
+                  addressDetails:
+                  - firstName: MiriamElkanah
+                    lastName: Etombi
+                    email: etombimaxwell@gmail.com
+                    deliveryAddress: Plot 190, Extension 2
+                    region: Kubwa
+                    city: Abuja
+                    _id: 63364d7f8cb7a4d511d7f684
+                  cart:
+                  - name: Nike
+                    image: ./images/image.jpg
+                    quantity: 3
+                    size: xl
+                    color: white
+                    _id: 63363bd48cb7a4d511d7f671
+                  orderStatus: pending
+                  user: 6329108dddd6b7fc854ccd02
+                  __v: 0
+                  deliveryMethod: Door Delivery
+      deprecated: false
+components:
+  schemas:
+    CartModel:
+      title: CartModel
+      required:
+      - name
+      - image
+      - quantity
+      - size
+      - color
+      type: object
+      properties:
+        name:
+          type: string
+        image:
+          type: string
+        quantity:
+          type: integer
+          format: int32
+        size:
+          type: string
+        color:
+          type: string
+      example:
+        name: Penhouse
+        image: ./images/image.jpg
+        quantity: 3
+        size: xl
+        color: red
+    UserModel:
+      title: UserModel
+      required:
+      - firstName
+      - lastName
+      - email
+      - password
+      - role
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: minLength of 3 and maxLength of 11. Must be provided
+          example: '"maxwell"'
+        lastName:
+          type: string
+          description: minLength of 3 and maxLength of 11. Must be provided
+          example: '"evans"'
+        email:
+          type: string
+          description: Must be provided and must be a valid email
+          example: '"example@gmail.com"'
+        password:
+          type: string
+          description: minLength of 5 and must be provided
+          example: '"secret123"'
+        role:
+          type: string
+          description: Default value is "user". Possible values are "user", "admin" and "merchant"
+          example: '"admin"'
+      description: Model for Auth and User category
+    ProductModel:
+      title: ProductModel
+      required:
+      - name
+      - images
+      - price
+      - currency
+      - colors
+      - size
+      - company
+      - categories
+      - description
+      - freeShipping
+      - inStock
+      - featured
+      - user
+      type: object
+      properties:
+        name:
+          type: string
+          description: minLength of 3, must be provided, value must be unique
+        images:
+          type: array
+          items:
+            type: string
+          description: ''
+        price:
+          type: integer
+          description: Must be provided
+          format: int32
+        currency:
+          type: string
+        colors:
+          type: array
+          items:
+            type: string
+          description: ''
+        size:
+          type: array
+          items:
+            type: string
+          description: ''
+        company:
+          type: string
+          description: Required. minLength 3 and maxLength 20
+        categories:
+          type: array
+          items:
+            type: string
+          description: Required.
+        description:
+          type: array
+          items:
+            type: string
+          description: Required.
+        freeShipping:
+          type: boolean
+        inStock:
+          type: integer
+          description: Required.
+          format: int32
+        featured:
+          type: boolean
+        user:
+          type: string
+          description: Required
+      description: Model for Product category
+    OrderModel:
+      title: OrderModel
+      required:
+      - subtotal
+      - shipping
+      - total
+      - addressDetails
+      - deliveryMethod
+      - cart
+      - orderStatus
+      - user
+      type: object
+      properties:
+        subtotal:
+          type: integer
+          format: int32
+        shipping:
+          type: integer
+          format: int32
+        total:
+          type: integer
+          format: int32
+        addressDetails:
+          allOf:
+          - $ref: '#/components/schemas/addressDetailsModel'
+          - {}
+        deliveryMethod:
+          type: string
+        cart:
+          allOf:
+          - $ref: '#/components/schemas/CartModel'
+          - {}
+        orderStatus:
+          type: string
+          description: values are "pending", "failed", "paid"
+        user:
+          type: string
+          description: Required.
+      description: Model for Order category
+    addressDetailsModel:
+      title: addressDetailsModel
+      required:
+      - firstName
+      - lastName
+      - email
+      - deliveryAddress
+      - region
+      - city
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: Required
+        lastName:
+          type: string
+          description: Required
+        email:
+          type: string
+          description: Required
+        deliveryAddress:
+          type: string
+          description: Required
+        region:
+          type: string
+          description: Required
+        city:
+          type: string
+          description: Required
+      description: Model for  addressDetails field in Order model
+    ReviewModel:
+      title: ReviewModel
+      required:
+      - title
+      - comment
+      - replies
+      - user
+      - product
+      type: object
+      properties:
+        title:
+          type: string
+          description: Required and minLength of 3
+        comment:
+          type: string
+          description: Required and minLength of 3
+        rating:
+          type: integer
+          format: int32
+          default: 0
+        replies:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReplyModel'
+          description: ''
+        user:
+          type: string
+          format: uuid
+        product:
+          type: object
+      description: Model for Review category
+    ReplyModel:
+      title: ReplyModel
+      required:
+      - comment
+      - user
+      type: object
+      properties:
+        comment:
+          type: string
+          description: Required
+        user:
+          type: object
+          description: Required
+      description: Model for replies in Review model
+  securitySchemes:
+    httpBearer:
+      type: http
+      scheme: bearer
+security:
+- httpBearer: []
+tags:
+- name: Auth
+- name: User
+- name: Product
+- name: Review
+- name: Order
